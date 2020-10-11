@@ -26,7 +26,10 @@ class IndexBot:
                 if (keyword.lower() in title) or (keyword.lower() in excerpt):
                     if news_item.find("a", {"class": "cim"}):
                         self.results.append(
-                            news_item.find("a", {"class": "cim"})["href"]
+                            {
+                                "title": title,
+                                "link": news_item.find("a", {"class": "cim"})["href"],
+                            }
                         )
 
     def refresh(self):
