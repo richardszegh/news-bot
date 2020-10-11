@@ -17,3 +17,7 @@ class HwswBot:
             for keyword in self.keywords:
                 if (keyword.lower() in title) or (keyword.lower() in excerpt):
                     self.results.append(news_item.a["href"])
+
+    def refresh(self):
+        self.markup = requests.get("https://www.hwsw.hu/hirachivum?page=1").text
+        self.parse()
