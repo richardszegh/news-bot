@@ -2,18 +2,18 @@ import requests
 from bs4 import BeautifulSoup
 
 
-class HwswBot:
+class HvgBot:
     def __init__(self, keywords):
-        self.markup = requests.get("https://www.hwsw.hu/hirachivum?page=1").text
+        self.markup = requests.get("https://hvg.hu/frisshirek").text
         self.keywords = keywords
         self.results = []
 
     def parse(self):
         soup = BeautifulSoup(self.markup, "html.parser")
-        news = soup.findAll("div", {"class": "news-content"})
+        news = soup.findAll("div", {"class": "text-holder"})
         for news_item in news:
-            title = news_item.a.text.lower().strip()
-            excerpt = news_item.span.text.lower().strip()
+            title = news_item.h1.a.text.lower().strip()
+            excerpt = news_item.p.text.lower().strip()
             for keyword in self.keywords:
                 if (keyword.lower() in title) or (keyword.lower() in excerpt):
-                    self.results.append(news_item.a["href"])
+                    self.results.append(news_item.h1.a["href"])

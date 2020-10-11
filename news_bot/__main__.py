@@ -1,9 +1,10 @@
 from news_bot.bot.hwsw import HwswBot
+from news_bot.bot.hvg import HvgBot
 
 
 def main():
-    hwswBot = HwswBot(["IbM", "Samsung"])
-    hwswBot.parse()
+    hvgBot = HvgBot(["IbM", "Samsung"])
+    hvgBot.parse()
 
 
 if __name__ == "__main__":
