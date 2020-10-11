@@ -24,7 +24,10 @@ class IndexBot:
             )
             for keyword in self.keywords:
                 if (keyword.lower() in title) or (keyword.lower() in excerpt):
-                    self.results.append(news_item.find("a", {"class": "cim"})["href"])
+                    if news_item.find("a", {"class": "cim"}):
+                        self.results.append(
+                            news_item.find("a", {"class": "cim"})["href"]
+                        )
 
     def refresh(self):
         self.markup = requests.get("https://index.hu/24ora/").text
