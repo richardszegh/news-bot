@@ -8,7 +8,7 @@ from news_bot.bot.index import IndexBot
 
 
 def main():
-    answers = {"sites": [], "keywords": []}
+    answers = {"sites": [], "keywords": [], "interval": 3600}
 
     answers["sites"] = prompt(
         [
@@ -36,6 +36,16 @@ def main():
         else:
             answers["keywords"].append(keywordAnswer["keyword"])
 
+    answers["interval"] = prompt(
+        [
+            {
+                "type": "input",
+                "message": "Ilyen gyakorisaggal nezz utana uj hireknek (masodpercben): ",
+                "name": "interval",
+            }
+        ]
+    )["interval"]
+
     activeBots = []
     for site in answers["sites"]:
         if site == "Index":
@@ -55,7 +65,7 @@ def main():
             if result not in seen:
                 print(result)
                 seen.append(result)
-        time.sleep(15)
+        time.sleep(int(answers["interval"]))
 
 
 if __name__ == "__main__":
