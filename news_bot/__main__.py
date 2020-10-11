@@ -1,5 +1,6 @@
 from pprint import pprint
 from PyInquirer import prompt
+import time
 
 from news_bot.bot.hwsw import HwswBot
 from news_bot.bot.hvg import HvgBot
@@ -44,12 +45,17 @@ def main():
         elif site == "HWSW":
             activeBots.append(HwswBot(answers["keywords"]))
 
-    results = []
-    for bot in activeBots:
-        bot.parse()
-        results.extend(bot.results)
-
-    pprint(results)
+    seen = []
+    while True:
+        results = []
+        for bot in activeBots:
+            bot.refresh()
+            results.extend(bot.results)
+        for result in results:
+            if result not in seen:
+                print(result)
+                seen.append(result)
+        time.sleep(15)
 
 
 if __name__ == "__main__":
