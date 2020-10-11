@@ -16,4 +16,4 @@ class HvgBot:
             excerpt = news_item.p.text.lower().strip()
             for keyword in self.keywords:
                 if (keyword.lower() in title) or (keyword.lower() in excerpt):
-                    self.results.append(news_item.h1.a["href"])
+                    self.results.append(f"https://hvg.hu{news_item.h1.a['href']}")
