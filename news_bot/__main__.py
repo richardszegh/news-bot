@@ -1,9 +1,9 @@
-from news_bot.bot import Bot
+from news_bot.bot.hwsw import HwswBot
 
 
 def main():
-    bot = Bot()
-    bot.sayHello()
+    hwswBot = HwswBot(["IbM", "Samsung"])
+    hwswBot.parse()
 
 
 if __name__ == "__main__":
